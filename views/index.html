@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>DeepHire</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
+</head>
+
+<body>
+
+<!-- Particle background -->
+<div id="particles-js"></div>
+
+<nav class="navbar">
+
+<div class="nav-left">
+<img src="/static/logo.png" class="logo">
+<h2>DeepHire</h2>
+</div>
+
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+<div class="hero" id="home" data-aos="fade-up">
+
+<h1 class="title">Smart matching. Seamless hiring.</h1>
+
+<div class="card">
+
+<input id="name" placeholder="Your Name">
+
+<input id="email" placeholder="Your Email">
+
+<textarea id="resumeText" placeholder="Paste resume text"></textarea>
+
+<div class="scan-bar"></div>
+
+<p class="or">OR</p>
+
+<input type="file" id="resumeFile">
+
+<button onclick="analyzeResume()">Analyze Resume</button>
+
+<div class="loader" id="loader"></div>
+
+<h3 id="result"></h3>
+
+<div class="score-container">
+<div class="score-bar" id="scoreBar"></div>
+</div>
+
+<p id="scoreText"></p>
+
+</div>
+
+</div>
+
+<!-- ABOUT -->
+
+<section id="about" class="about-section" data-aos="fade-right">
+
+<h2>About DeepHire</h2>
+
+<p>
+DeepHire is an AI-powered hiring assistant that uses Natural Language Processing
+and Machine Learning to analyze resumes and intelligently match candidates
+with suitable job roles.
+</p>
+
+<p>
+The platform helps reduce manual screening time and enables smarter hiring
+decisions by automatically predicting the most relevant job category for each resume.
+</p>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="contact-section" data-aos="fade-up">
+
+<h2 class="section-title">Contact Our Team</h2>
+
+<p class="contact-desc">
+Have questions about DeepHire? Reach out to our development team.
+</p>
+
+<div class="contact-grid">
+
+<div class="contact-card">
+<h4>👨‍🎓 Rohit</h4>
+<a href="mailto:bwubts24309@brainwareuniversity.ac.in">
+bwubts24309@brainwareuniversity.ac.in
+</a>
+</div>
+
+<div class="contact-card">
+<h4>👨‍🎓 Ankit</h4>
+<a href="mailto:bwubts24311@brainwareuniversity.ac.in">
+bwubts24311@brainwareuniversity.ac.in
+</a>
+</div>
+
+<div class="contact-card">
+<h4>👨‍🎓 Indranil</h4>
+<a href="mailto:bwubts24326@brainwareuniversity.ac.in">
+bwubts24326@brainwareuniversity.ac.in
+</a>
+</div>
+
+<div class="contact-card">
+<h4>👩‍🎓 Debarati</h4>
+<a href="mailto:bwubts24313@brainwareuniversity.ac.in">
+bwubts24313@brainwareuniversity.ac.in
+</a>
+</div>
+
+<div class="contact-card">
+<h4>👨‍🎓 Subhajit</h4>
+<a href="mailto:bwubts24353@brainwareuniversity.ac.in">
+bwubts24353@brainwareuniversity.ac.in
+</a>
+</div>
+
+<div class="contact-card">
+<h4>👨‍🎓 Tohidur</h4>
+<a href="mailto:bwubts24356@brainwareuniversity.ac.in">
+bwubts24356@brainwareuniversity.ac.in
+</a>
+</div>
+
+</div>
+
+<p class="institution">Brainware University – CSE Department</p>
+
+</section>
+
+<footer class="footer">
+© 2026 DeepHire – Developed by BWU CSE-F
+<span class="team">(Indranil, Debarati, Rohit, Ankit, Tohidur, Subhajit)</span>
+</footer>
+
+<div class="cursor"></div>
+
+<!-- Scripts -->
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<script src="/static/script.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init({
+duration:1000,
+once:true
+});
+</script>
+
+</body>
+</html>
