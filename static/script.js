@@ -5,15 +5,31 @@ let result = document.getElementById("result")
 let scoreBar = document.getElementById("scoreBar")
 let scoreText = document.getElementById("scoreText")
 
+let text = document.getElementById("resumeText").value.trim()
+let fileInput = document.getElementById("resumeFile")
+
+/* INPUT VALIDATION */
+
+if(text === "" && fileInput.files.length === 0){
+    result.innerText = "⚠ Please paste resume text or upload a resume file."
+    result.style.color = "#ef4444"
+    return
+}
+
+/* START LOADING */
+
 loader.style.display = "block"
 result.innerText = "AI is analyzing the resume..."
+result.style.color = "#ffffff"
 
-let text = document.getElementById("resumeText").value
-let fileInput = document.getElementById("resumeFile")
+scoreBar.style.width = "0%"
+scoreText.innerText = ""
 
 try{
 
 let data
+
+/* FILE UPLOAD */
 
 if(fileInput.files.length > 0){
 
@@ -28,6 +44,9 @@ body:formData
 data = await response.json()
 
 }
+
+/* TEXT INPUT */
+
 else{
 
 let response = await fetch("/predict-role",{
@@ -40,12 +59,14 @@ data = await response.json()
 
 }
 
+/* SHOW RESULT */
+
 if(data.predicted_role){
 
 result.innerText = "Predicted Role: " + data.predicted_role
-result.style.color = "#22c55e"   // ← add it here
+result.style.color = "#22c55e"
 
-/* Generate match score */
+/* MATCH SCORE */
 
 let score = Math.floor(Math.random()*40) + 60
 
@@ -53,9 +74,11 @@ scoreBar.style.width = score + "%"
 scoreText.innerText = "Match Score: " + score + "%"
 
 }
+
 else{
 
 result.innerText = data.message || "Prediction failed"
+result.style.color = "#ef4444"
 
 }
 
@@ -63,16 +86,19 @@ result.innerText = data.message || "Prediction failed"
 
 catch(err){
 
-result.innerText = "Error analyzing resume"
+result.innerText = "⚠ Error analyzing resume"
+result.style.color = "#ef4444"
 
 }
+
+/* STOP LOADER */
 
 loader.style.display = "none"
 
 }
 
 
-/* Cursor */
+/* CUSTOM CURSOR */
 
 const cursor = document.querySelector(".cursor")
 
@@ -81,7 +107,7 @@ cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`
 })
 
 
-/* Particle background */
+/* PARTICLE BACKGROUND */
 
 particlesJS("particles-js", {
 particles: {

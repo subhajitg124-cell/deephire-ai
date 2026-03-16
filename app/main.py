@@ -1,31 +1,34 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from fastapi import UploadFile, File
 from pdfminer.high_level import extract_text
 import joblib
 import os
+import uuid
 
 app = FastAPI(
-title="AI Hiring Platform",
-description="Advanced AI Hiring & Workforce Optimization"
+    title="AI Hiring Platform",
+    description="Advanced AI Hiring & Workforce Optimization"
 )
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# --- 1. Robust Path Resolution ---
+# -------------------------------
+# 1. Robust Path Resolution
+# -------------------------------
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
 MODELS_DIR = os.path.join(PROJECT_ROOT, "models")
 VIEWS_DIR = os.path.join(PROJECT_ROOT, "views")
 
-# Initialize variables
-
 vectorizer = None
 classifier_model = None
 
-# --- 2. Load trained AI models ---
+# -------------------------------
+# 2. Load Trained Models
+# -------------------------------
 
 print(f"Looking for models in: {MODELS_DIR}")
 
@@ -37,42 +40,54 @@ try:
 except Exception as e:
     print(f"❌ Failed to load models: {e}")
 
-# --- 3. Define input structure ---
+# -------------------------------
+# 3. Input Structure
+# -------------------------------
 
 class ResumeInput(BaseModel):
     text: str
 
-# --- 4. Web Page Route (Frontend UI) ---
-
-# --- 4. Web Page Route (Frontend UI) ---
+# -------------------------------
+# 4. Frontend Route
+# -------------------------------
 
 @app.get("/")
 def home():
-    file_path = os.path.join(PROJECT_ROOT, "views", "index.html")
+    file_path = os.path.join(VIEWS_DIR, "index.html")
     return FileResponse(file_path)
 
-# --- 5. API Endpoint for Prediction ---
+# -------------------------------
+# 5. Resume Text Prediction
+# -------------------------------
 
 @app.post("/predict-role")
 def predict_role(resume: ResumeInput):
+
+    text = resume.text
+
+    # Validation
+    if not text.strip():
+        return {
+            "status": "error",
+            "message": "Resume text cannot be empty"
+        }
+
     if vectorizer is None or classifier_model is None:
         return {
             "status": "error",
-            "message": "Models failed to load. Check terminal for details."
+            "message": "Models failed to load"
         }
 
     try:
-        # Convert resume text into vector
-        vectorized_text = vectorizer.transform([resume.text])
+        # Convert text to vector
+        vectorized_text = vectorizer.transform([text])
 
         # Predict job role
         prediction = classifier_model.predict(vectorized_text)
 
-        final_role = str(prediction[0])
-
         return {
             "status": "success",
-            "predicted_role": final_role
+            "predicted_role": str(prediction[0])
         }
 
     except Exception as e:
@@ -80,64 +95,46 @@ def predict_role(resume: ResumeInput):
             "status": "error",
             "message": f"Prediction error: {str(e)}"
         }
-        from fastapi import UploadFile, File
-import pdfplumber
 
-@app.post("/upload-resume")
-async def upload_resume(file: UploadFile = File(...)):
+# -------------------------------
+# 6. Resume File Upload
+# -------------------------------
 
-    try:
-
-        text = ""
-
-        if file.filename.endswith(".pdf"):
-            with pdfplumber.open(file.file) as pdf:
-                for page in pdf.pages:
-                    page_text = page.extract_text()
-                    if page_text:
-                        text += page_text
-
-        else:
-            content = await file.read()
-            text = content.decode("utf-8")
-
-        vectorized = vectorizer.transform([text])
-        prediction = classifier_model.predict(vectorized)
-
-        return {
-            "status":"success",
-            "predicted_role": str(prediction[0])
-        }
-
-    except Exception as e:
-        return {
-            "status":"error",
-            "message":str(e)
-        }
 @app.post("/upload-resume")
 async def upload_resume(file: UploadFile = File(...)):
 
     if vectorizer is None or classifier_model is None:
-        return {"status": "error", "message": "Models not loaded"}
+        return {
+            "status": "error",
+            "message": "Models not loaded"
+        }
 
     try:
-        # Save uploaded file temporarily
-        file_path = f"temp_{file.filename}"
+        # Unique temporary file
+        file_path = f"temp_{uuid.uuid4()}.pdf"
 
+        # Save file
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
 
-        # Extract text from PDF
+        # Extract text
         text = extract_text(file_path)
+
+        # Remove temp file
+        os.remove(file_path)
+
+        # Validation
+        if not text.strip():
+            return {
+                "status": "error",
+                "message": "Uploaded file has no readable text"
+            }
 
         # Convert text to vector
         vectorized_text = vectorizer.transform([text])
 
-        # Predict job role
+        # Predict role
         prediction = classifier_model.predict(vectorized_text)
-
-        # Remove temp file
-        os.remove(file_path)
 
         return {
             "status": "success",
