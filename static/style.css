@@ -640,3 +640,29 @@ left:0;
 z-index:0;
 pointer-events:none;
 }
+
+/* ===================== MOUSE SPOTLIGHT ===================== */
+
+#spotlight{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:1;
+transition:background 0.08s ease;
+}
+
+/* ===================== SHAKE ANIMATION ===================== */
+
+@keyframes shake{
+0%,100%{transform:translateX(0);}
+20%{transform:translateX(-8px);}
+40%{transform:translateX(8px);}
+60%{transform:translateX(-5px);}
+80%{transform:translateX(5px);}
+}
+
+input.shake{
+animation:shake 0.45s ease;
+border-color:rgba(249,115,22,0.7) !important;
+box-shadow:0 0 0 3px rgba(249,115,22,0.2) !important;
+}

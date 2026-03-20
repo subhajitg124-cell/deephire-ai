@@ -10,6 +10,34 @@ let fileInput = document.getElementById("resumeFile")
 
 /* INPUT VALIDATION */
 
+let name = document.getElementById("name").value.trim()
+let email = document.getElementById("email").value.trim()
+
+if(!name){
+    result.innerText = "⚠ Please enter your name to continue."
+    result.style.color = "#f97316"
+    document.getElementById("name").focus()
+    shakeInput("name")
+    return
+}
+
+if(!email){
+    result.innerText = "⚠ Please enter your email to continue."
+    result.style.color = "#f97316"
+    document.getElementById("email").focus()
+    shakeInput("email")
+    return
+}
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+if(!emailRegex.test(email)){
+    result.innerText = "⚠ Please enter a valid email address."
+    result.style.color = "#f97316"
+    document.getElementById("email").focus()
+    shakeInput("email")
+    return
+}
+
 if(text === "" && fileInput.files.length === 0){
     result.innerText = "⚠ Please paste resume text or upload a resume file."
     result.style.color = "#ef4444"
@@ -98,6 +126,16 @@ loader.style.display = "none"
 }
 
 
+/* ===================== SHAKE INPUT ===================== */
+
+function shakeInput(id){
+    const el = document.getElementById(id)
+    el.classList.remove("shake")
+    void el.offsetWidth
+    el.classList.add("shake")
+    setTimeout(() => el.classList.remove("shake"), 500)
+}
+
 /* ===================== CUSTOM CURSOR ===================== */
 
 const cursor = document.querySelector(".cursor")
@@ -137,6 +175,20 @@ hoverTargets.forEach(el => {
     })
 })
 
+
+/* ===================== MOUSE BACKGROUND SPOTLIGHT ===================== */
+
+const spotlight = document.getElementById("spotlight")
+
+document.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth) * 100
+    const y = (e.clientY / window.innerHeight) * 100
+    spotlight.style.background =
+        `radial-gradient(circle 380px at ${x}% ${y}%,
+        rgba(34,197,94,0.07) 0%,
+        rgba(56,189,248,0.04) 40%,
+        transparent 70%)`
+})
 
 /* ===================== PARTICLE BACKGROUND ===================== */
 
