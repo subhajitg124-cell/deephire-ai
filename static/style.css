@@ -130,15 +130,14 @@ gap:10px;
 }
 
 .nav-left h2{
-font-family:'Orbitron', sans-serif;
-font-weight:900;
-font-size:17px;
-letter-spacing:2px;
+font-family:'Audiowide', sans-serif;
+font-weight:400;
+font-size:18px;
+letter-spacing:1.5px;
 background:linear-gradient(135deg,#22c55e 0%,#38bdf8 60%,#818cf8 100%);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 background-clip:text;
-text-transform:uppercase;
 filter:drop-shadow(0 0 8px rgba(34,197,94,0.35));
 }
 
