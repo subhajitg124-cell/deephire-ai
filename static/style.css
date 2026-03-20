@@ -130,10 +130,11 @@ gap:10px;
 }
 
 .nav-left h2{
-font-family:'Syne', sans-serif;
-font-weight:800;
+font-family:'Exo 2', sans-serif;
+font-weight:900;
 font-size:20px;
-letter-spacing:1px;
+letter-spacing:2px;
+text-transform:uppercase;
 background:linear-gradient(135deg,#22c55e,#38bdf8);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
