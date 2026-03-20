@@ -12,8 +12,16 @@
 
 <body>
 
-<!-- Particle background -->
 <div id="particles-js"></div>
+
+<!-- Animated blobs for sections -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- Custom cursor -->
+<div class="cursor"></div>
+<div class="cursor-trail"></div>
 
 <nav class="navbar">
 
@@ -66,20 +74,35 @@
 
 <!-- ABOUT -->
 
-<section id="about" class="about-section" data-aos="fade-right">
+<section id="about" class="about-section" data-aos="fade-up">
 
-<h2>About DeepHire</h2>
+<div class="section-blob about-blob-1"></div>
+<div class="section-blob about-blob-2"></div>
 
-<p>
+<div class="about-glass">
+
+<div class="about-icon" data-aos="zoom-in" data-aos-delay="100">🤖</div>
+
+<h2 data-aos="fade-up" data-aos-delay="150">About DeepHire</h2>
+
+<p data-aos="fade-up" data-aos-delay="200">
 DeepHire is an AI-powered hiring assistant that uses Natural Language Processing
 and Machine Learning to analyze resumes and intelligently match candidates
 with suitable job roles.
 </p>
 
-<p>
+<p data-aos="fade-up" data-aos-delay="250">
 The platform helps reduce manual screening time and enables smarter hiring
 decisions by automatically predicting the most relevant job category for each resume.
 </p>
+
+<div class="about-stats" data-aos="fade-up" data-aos-delay="300">
+<div class="stat-chip">⚡ NLP Powered</div>
+<div class="stat-chip">🎯 Smart Matching</div>
+<div class="stat-chip">📄 PDF Support</div>
+</div>
+
+</div>
 
 </section>
 
@@ -87,75 +110,83 @@ decisions by automatically predicting the most relevant job category for each re
 
 <section id="contact" class="contact-section" data-aos="fade-up">
 
-<h2 class="section-title">Contact Our Team</h2>
+<div class="section-blob contact-blob-1"></div>
+<div class="section-blob contact-blob-2"></div>
 
-<p class="contact-desc">
+<h2 class="section-title" data-aos="fade-down">Contact Our Team</h2>
+
+<p class="contact-desc" data-aos="fade-up" data-aos-delay="100">
 Have questions about DeepHire? Reach out to our development team.
 </p>
 
 <div class="contact-grid">
 
-<div class="contact-card">
+<div class="contact-card" data-aos="zoom-in" data-aos-delay="0">
+<div class="card-glow"></div>
 <h4>👨‍🎓 Rohit</h4>
 <a href="mailto:bwubts24309@brainwareuniversity.ac.in">
 bwubts24309@brainwareuniversity.ac.in
 </a>
 </div>
 
-<div class="contact-card">
+<div class="contact-card" data-aos="zoom-in" data-aos-delay="80">
+<div class="card-glow"></div>
 <h4>👨‍🎓 Ankit</h4>
 <a href="mailto:bwubts24311@brainwareuniversity.ac.in">
 bwubts24311@brainwareuniversity.ac.in
 </a>
 </div>
 
-<div class="contact-card">
+<div class="contact-card" data-aos="zoom-in" data-aos-delay="160">
+<div class="card-glow"></div>
 <h4>👨‍🎓 Indranil</h4>
 <a href="mailto:bwubts24326@brainwareuniversity.ac.in">
 bwubts24326@brainwareuniversity.ac.in
 </a>
 </div>
 
-<div class="contact-card">
-<h4>👩‍🎓 Debarati</h4>
-<a href="mailto:bwubts24313@brainwareuniversity.ac.in">
-bwubts24313@brainwareuniversity.ac.in
-</a>
-</div>
-
-<div class="contact-card">
-<h4>👨‍🎓 Subhajit</h4>
-<a href="mailto:bwubts24353@brainwareuniversity.ac.in">
-bwubts24353@brainwareuniversity.ac.in
-</a>
-</div>
-
-<div class="contact-card">
-<h4>👨‍🎓 Tohidur</h4>
-<a href="mailto:bwubts24356@brainwareuniversity.ac.in">
-bwubts24356@brainwareuniversity.ac.in
-</a>
-</div>
-
-<div class="contact-card">
+<div class="contact-card featured-card" data-aos="zoom-in" data-aos-delay="240">
+<div class="card-glow"></div>
 <h4>👨‍🎓 Saiyab</h4>
 <a href="mailto:bwubts24340@brainwareuniversity.ac.in">
 bwubts24340@brainwareuniversity.ac.in
 </a>
 </div>
 
+<div class="contact-card" data-aos="zoom-in" data-aos-delay="320">
+<div class="card-glow"></div>
+<h4>👩‍🎓 Debarati</h4>
+<a href="mailto:bwubts24313@brainwareuniversity.ac.in">
+bwubts24313@brainwareuniversity.ac.in
+</a>
 </div>
 
-<p class="institution">Brainware University – CSE Department</p>
+<div class="contact-card" data-aos="zoom-in" data-aos-delay="400">
+<div class="card-glow"></div>
+<h4>👨‍🎓 Subhajit</h4>
+<a href="mailto:bwubts24353@brainwareuniversity.ac.in">
+bwubts24353@brainwareuniversity.ac.in
+</a>
+</div>
+
+<div class="contact-card" data-aos="zoom-in" data-aos-delay="480">
+<div class="card-glow"></div>
+<h4>👨‍🎓 Tohidur</h4>
+<a href="mailto:bwubts24356@brainwareuniversity.ac.in">
+bwubts24356@brainwareuniversity.ac.in
+</a>
+</div>
+
+</div>
+
+<p class="institution" data-aos="fade-up">Brainware University – CSE Department</p>
 
 </section>
 
 <footer class="footer">
 © 2026 DeepHire – Developed by BWU CSE-F
-<span class="team">(Indranil, Debarati, Rohit, Ankit, Tohidur, Subhajit, Saiyab)</span>
+<span class="team">(Rohit, Ankit, Indranil, Saiyab, Debarati, Subhajit, Tohidur)</span>
 </footer>
-
-<div class="cursor"></div>
 
 <!-- Scripts -->
 
@@ -167,8 +198,9 @@ bwubts24340@brainwareuniversity.ac.in
 
 <script>
 AOS.init({
-duration:1000,
-once:true
+duration:900,
+once:true,
+easing:'ease-out-cubic'
 });
 </script>
 

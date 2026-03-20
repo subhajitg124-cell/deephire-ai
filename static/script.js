@@ -98,34 +98,79 @@ loader.style.display = "none"
 }
 
 
-/* CUSTOM CURSOR */
+/* ===================== CUSTOM CURSOR ===================== */
 
 const cursor = document.querySelector(".cursor")
+const trail = document.querySelector(".cursor-trail")
 
-document.addEventListener("mousemove",(e)=>{
-cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`
+let mouseX = 0, mouseY = 0
+let trailX = 0, trailY = 0
+
+document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+    cursor.style.left = mouseX + "px"
+    cursor.style.top = mouseY + "px"
+})
+
+/* Smooth trailing ring */
+function animateTrail(){
+    trailX += (mouseX - trailX) * 0.12
+    trailY += (mouseY - trailY) * 0.12
+    trail.style.left = trailX + "px"
+    trail.style.top = trailY + "px"
+    requestAnimationFrame(animateTrail)
+}
+animateTrail()
+
+/* Hover effect on interactive elements */
+const hoverTargets = document.querySelectorAll("a, button, input, textarea, .contact-card, .stat-chip, .nav-links li")
+
+hoverTargets.forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        cursor.classList.add("hovering")
+        trail.classList.add("hovering")
+    })
+    el.addEventListener("mouseleave", () => {
+        cursor.classList.remove("hovering")
+        trail.classList.remove("hovering")
+    })
 })
 
 
-/* PARTICLE BACKGROUND */
+/* ===================== PARTICLE BACKGROUND ===================== */
 
 particlesJS("particles-js", {
 particles: {
-number: { value: 60 },
-color: { value: "#22c55e" },
+number: { value: 55, density: { enable: true, value_area: 900 } },
+color: { value: ["#22c55e", "#38bdf8", "#818cf8"] },
 shape: { type: "circle" },
-opacity: { value: 0.5 },
-size: { value: 3 },
+opacity: { value: 0.4, random: true, anim: { enable: true, speed: 0.8, opacity_min: 0.1 } },
+size: { value: 2.5, random: true },
 line_linked: {
 enable: true,
-distance: 150,
-color: "#22c55e",
-opacity: 0.4,
+distance: 140,
+color: "#38bdf8",
+opacity: 0.2,
 width: 1
 },
 move: {
 enable: true,
-speed: 2
+speed: 1.2,
+direction: "none",
+random: true,
+out_mode: "out"
+}
+},
+interactivity: {
+detect_on: "canvas",
+events: {
+onhover: { enable: true, mode: "repulse" },
+onclick: { enable: true, mode: "push" }
+},
+modes: {
+repulse: { distance: 80, duration: 0.4 },
+push: { particles_nb: 3 }
 }
 }
 })
